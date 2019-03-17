@@ -3,7 +3,201 @@
 {% block content %}
 {{block.super}}
 <body>
-    
-        <h1>It is working</h1>
+    {% include 'navbar.html' %}
+
+    <div id="demo" class="carousel slide" data-ride="carousel">
+        <ul class="carousel-indicators">
+          <li data-target="#demo" data-slide-to="0" class="active"></li>
+          <li data-target="#demo" data-slide-to="1"></li>
+          <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+              <img src="https://images.unsplash.com/photo-1498805983167-a523078d762c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=785&q=80" alt="Los Angeles" width="100%" height="500">
+              <div class="carousel-caption">
+                <h3>BEST AWARDS STUDIO</h3>
+                <p>We had such a great time in LA!</p>
+              </div> 
+          </div>
+          <div class="carousel-item">
+            <img src="https://images.unsplash.com/photo-1470299568568-d4e15c4b6472?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="Chicago" width="100%" height="500">
+            <div class="carousel-caption">
+              <h3>SLEEK ELEGANT DESIGNS</h3>
+              <p>Thank you, Chicago!</p>
+            </div>   
+          </div>
+          <div class="carousel-item">
+              <img src="https://images.unsplash.com/photo-1552327803-2c89bc3e1483?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="New York" width="100%" height="500">
+              <div class="carousel-caption">
+                <h3>CREATED WITH LOVE</h3>
+                <p>We love the Big Apple!</p>
+              </div>      
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a>
+      </div>
+    <br>
+  
+    <style>
+      .carousel-caption{
+        transform: translate(0% , -150%);
+      }
+      .target{
+        transform: translate(0% , -6250%);
+        height: 20px;
+      }
+      section {
+    padding: 60px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+#footer {
+    background: #007b5e !important;
+}
+#footer h5{
+	padding-left: 10px;
+    border-left: 3px solid #eeeeee;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+    color:#ffffff;
+}
+#footer a {
+    color: #ffffff;
+    text-decoration: none !important;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+#footer ul.social li{
+	padding: 3px 0;
+}
+#footer ul.social li a i {
+    margin-right: 5px;
+	font-size:25px;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#footer ul.social li:hover a i {
+	font-size:30px;
+	margin-top:-10px;
+}
+#footer ul.social li a,
+#footer ul.quick-links li a{
+	color:#ffffff;
+}
+#footer ul.social li a:hover{
+	color:#eeeeee;
+}
+#footer ul.quick-links li{
+	padding: 3px 0;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#footer ul.quick-links li:hover{
+	padding: 3px 0;
+	margin-left:5px;
+	font-weight:700;
+}
+#footer ul.quick-links li a i{
+	margin-right: 5px;
+}
+#footer ul.quick-links li:hover a i {
+    font-weight: 700;
+}
+
+@media (max-width:767px){
+	#footer h5 {
+    padding-left: 0;
+    border-left: transparent;
+    padding-bottom: 0px;
+    margin-bottom: 10px;
+}
+}
+    </style>
+    <div class="container">
+      <div class="row" style="border-bottom: 1px solid rgba(0, 0, 0, .3); padding-bottom:70px;">
+        <div class="col-md-6">
+          <h3 style="font-family: 'Playfair Display', serif;">Awwarding the unforgettable websites</h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae beatae excepturi blanditiis vitae error. Voluptatem, ut ratione. Adipisci esse laudantium laboriosam sapiente nesciunt, fugit quis sed omnis accusamus distinctio obcaecati.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae beatae excepturi blanditiis vitae error. Voluptatem, ut ratione. Adipisci esse laudantium laboriosam sapiente nesciunt, fugit quis sed omnis accusamus distinctio obcaecati.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae beatae excepturi blanditiis vitae error. Voluptatem, ut ratione. Adipisci esse laudantium laboriosam sapiente nesciunt, fugit quis sed omnis accusamus distinctio obcaecati.</p>
+
+        </div>
+        <div class="col-md-6">
+          <img src="https://images.unsplash.com/photo-1552624189-2f10d9bda06f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="" style="height:400px; width:500px">
+        </div>
+      </div>
+      <div class="gallery">
+        <h1>They will be here</h1>
+      </div>
+    </div>
+    <!-- Footer -->
+    <section id="footer">
+        <div class="container">
+          <div class="row text-center text-xs-center text-sm-left text-md-left">
+            <div class="col-xs-12 col-sm-4 col-md-4">
+              <h5>Quick links</h5>
+              <ul class="list-unstyled quick-links">
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+              </ul>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4">
+              <h5>Quick links</h5>
+              <ul class="list-unstyled quick-links">
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+              </ul>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4">
+              <h5>Quick links</h5>
+              <ul class="list-unstyled quick-links">
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+                <li><a href="#" title="Design and developed by"><i class="fa fa-angle-double-right"></i>Imprint</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+              <ul class="list-unstyled list-inline social text-center">
+                <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-facebook"></i></a></li>
+                <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-twitter"></i></a></li>
+                <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-instagram"></i></a></li>
+                <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-google-plus"></i></a></li>
+                <li class="list-inline-item"><a href="javascript:void();" target="_blank"><i class="fa fa-envelope"></i></a></li>
+              </ul>
+            </div>
+            </hr>
+          </div>	
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+              <p><u><a href="">Best-Awardz</a></u> Inc , will help developers from allover showcase their work [as well as inpiration]</p>
+              <p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="#" target="_blank">Geerocktricks</a></p>
+            </div>
+            </hr>
+          </div>	
+        </div>
+      </section>
+      <!-- ./Footer -->
 </body>
 {% endblock %}
