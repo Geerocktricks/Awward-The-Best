@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db import models
-# from pyuploadcare.dj.models import ImageField
+from pyuploadcare.dj.models import ImageField
 from django import forms
 
 # Create your models here.

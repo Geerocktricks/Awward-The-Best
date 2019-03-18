@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'pyuploadcare.dj',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,11 @@ TEMPLATES = [
         },
     },
 ]
+
+UPLOADCARE = {
+    'pub_key': 'eaf645284ae37e83a22f',
+    'secret': '661470ab0346949c6d55',
+}
 
 WSGI_APPLICATION = 'bestAwwards.wsgi.application'
 
