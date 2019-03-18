@@ -56,7 +56,9 @@ ROOT_URLCONF = 'bestAwwards.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'wins/templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,8 +79,10 @@ WSGI_APPLICATION = 'bestAwwards.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'wins',
+        'USER': 'geerocktricks',
+        'PASSWORD':'Geerock_1',
     }
 }
 
@@ -90,7 +94,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
-    {
+    { 
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
