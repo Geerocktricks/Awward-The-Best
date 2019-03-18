@@ -57,6 +57,16 @@
         </div>
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
             <ul class="navbar-nav ml-auto">
+                    <div class="col-sm-4 col-md-4">
+
+                            <form class="navbar-form" role="search" action="">
+                      
+                              <div class="input-group search">
+                                <input type="text" class="form-control" placeholder='search...' name="search" style="max-width:215px; height: 28px; background-color:rgb(250, 250, 250);line-height: 38px; text-align: center;">
+                              </div>
+                      
+                            </form>
+                          </div>
                 <li class="nav-item" style="float:right;">
                     <a class="nav-link" href="{% url 'welcome' %}">LOGOUT</a>
                 </li>
@@ -64,70 +74,178 @@
             </ul>
         </div>
     </nav>
-    <div class="container" style="margin-top: 130px;">
-        <div class="row profile-head mt-5">
-            <div class="col-sm-10 col-md-4 text-center">
-                {% if user.profile.pic%}
-                <img src="{{user.profile.pic.cdn_url}}" alt="" height="180px" width="180px" class="profile-pic">
-                {% else %}
-                <img src="https://www.shareicon.net/data/512x512/2017/05/30/886556_user_512x512.png" alt="" height="180px" width="180px" class="profile-pic">
-                {% endif %}
-            </div>
-            <div class="col-sm-10 col-md-5">
-                <h4 class="d-inline-block">{{user.username}}</h4>
-                
-                <p>{{user.profile.bio}}</p>
-            </div>
-            <div class="container" id="image-section">
+    <div class="container" id="image-section">
+
+        <div class="container" style="margin-top: 130px;">
+            <div class="row profile-head mt-5">
+                <div class="col-sm-10 col-md-4 text-center">
+                    {% if user.profile.pic%}
+                    <img src="{{user.profile.pic.cdn_url}}" alt="" height="180px" width="180px" class="profile-pic">
+                    {% else %}
+                    <img src="https://www.shareicon.net/data/512x512/2017/05/30/886556_user_512x512.png" alt="" height="180px" width="180px" class="profile-pic">
+                    {% endif %}
+                </div>
+                <div class="col-sm-10 col-md-5">
+                    <h4 class="d-inline-block">{{user.username}}</h4>
+
+                </div>
                 <!-- Trigger the modal with a button -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">+</button>
-                    </div>
-                    <div class="col-md-6">
-                        <p>Logged in as <b style="color:black;">{{user.username}}</b> </p>
-                    </div>
-                </div>
-              
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" role="dialog">
-                  <div class="modal-dialog">
-                  
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Projects</h4>
-                      </div>
-                      <div class="modal-body">
-                            <form action="" method="post">
-                                    {% csrf_token %}
-                                    {{ form }}
-                                    <input type="submit" value="Save"/>
-                            </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      </div>
-                    </div>
-                    
-                  </div>
-                </div>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">+</button>
             </div>
         </div>
-        <hr>
-        <div class="container">
-            <div class="row m-auto image-container" style="max-width: 750px">
-                {% for image in user.posts.all%}
-                    <div class="user-images col-sx-10 col-sm-6 col-md-6 col-lg-4 mb-1">
-                    <img src="{{image.image_url.cdn_url}}" alt="" onclick="showModal('{{image.image_url.cdn_url}}','{{user.username}}','{{image.caption}}')"="200px" width="200px">
+      
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="fab fa-instagram"></i> <span>|</span> Instarock</h4>
+              </div>
+              <div class="modal-body">
+                    <form action="" method="post">
+                            {% csrf_token %}
+                            {{ form }}
+                            <input type="submit" value="Save"/>
+                    </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+            </div>
+            <hr>
+        </div>
+    {% for image in images%}
+    <img src="{{image.user.profile.pic}}" alt="">
+    <div class="row col-md-12">
+        <div class="col-sm-10 col-md-6" style="padding:10px;">
+            <div class="w3-card-4" id="{{image.id}}">
+                <header class="w3-container">
+                    
+                    </a>
+                </header>
+                <div class="w3-container">
+                    <img src="{{image.image.cdn_url}}" alt="here" class="img-responsive" style="max-height: 500px; width: 100%;">
                 </div>
-                {% empty %}
-                    <h4 class="text-center">You haven't posted any photo yet</h4>
-                {% endfor %}
+                <footer class="w3-container" style="padding:30px">
+                    <p>{{image.caption}}</p>
+                        {%csrf_token%}
+                        <p class="likes-icon mr-2">{{image.likes.all.count}} likes</p>
+                        <button class="btn btn-info" type="submit" onclick="liker('{{image.id}}')" style="margin-bottom:30px;">like</button>
+                        <!-- <a href="">&#128077;</a> -->
+                    </form>
+                    
+                </footer>
             </div>
         </div>
     </div>
+    {% endfor%}
+</div>
+{% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% bootstrap_javascript %}
+<script>
+    window.addEventListener("pageshow", function (event) {
+        var historyTraversal = event.persisted ||
+            (typeof window.performance != "undefined" &&
+                window.performance.navigation.type === 2);
+        if (historyTraversal) {
+            // Handle page restore.
+            window.location.reload();
+        }
+    });
+    $(".like-btn").click((e) => {
+        e.preventDefault()
+    })
+    function liker(id) {
+        image_id = id
+        let icons = document.getElementsByClassName("likes-icon")
+        let btns = document.getElementsByClassName("fa-heart")
+        console.log(icons)
+        console.log(btns)
+        console.log(image_id)
+        $.ajax({
+            "url": "/ajax/like/",
+            "type": "POST",
+            "data": {
+                "id": image_id,
+                "csrfmiddlewaretoken": '{{csrf_token}}'
+            },
+            "dataType": "json",
+            "success": function (res) {
+                let imagess = parseInt(image_id)
+                imagess -= 1
+                icons[imagess].innerHTML = res['likes'] + " likes"
+                if (res["to_red"] == 1) {
+                    alert("Liked")
+                    btns[imagess].classList.remove("far")
+                    btns[imagess].classList.add("fas")
+                    btns[imagess].style.color = "red"
+                } else {
+                    alert("Unliked")
+                    btns[imagess].classList.remove("fas")
+                    btns[imagess].classList.add("far")
+                    btns[imagess].style.color = "black"
+                }
+            }
+        })
+    }
+    $(".comment-btn").click(e => {
+        e.preventDefault()
+    })
+    function commenter(id) {
+        let comments = document.getElementsByClassName("comments")
+        let image_id = parseInt(id)
+        let commentVals = document.getElementsByClassName("comment-val")
+        let comment = commentVals[id - 1].value
+        $.ajax({
+            "url": "/ajax/comment/",
+            "type": "POST",
+            "data": {
+                "id": image_id,
+                "comment": comment,
+                "csrfmiddlewaretoken": '{{csrf_token}}'
+            },
+            "dataType": "json",
+            "success": function (res) {
+                let p = document.createElement("p")
+                p.setAttribute("class", "actual-comment")
+                p.textContent = res['user'] + ": " + res["comment"]
+                comments[image_id - 1].appendChild(p)
+            }
+        })
+        $(".comment-val").val("")
+    }
+    function follower(id) {
+        let image_id = parseInt(id)
+        followBtns = document.getElementsByClassName("follow-btn")
+        $.ajax({
+            "url": "/ajax/follow/",
+            "type": "POST",
+            "data": {
+                "id": image_id,
+                "csrfmiddlewaretoken": '{{csrf_token}}'
+            },
+            "dataType": "json",
+            "success": function (res) {
+                if (res['followed'] == 1) {
+                    followBtns[image_id - 1].innerHTML = "<i class='fas fa-user-check'></i>"
+                } else {
+                    followBtns[image_id - 1].innerHTML = "<i class='fas fa-user-plus'></i>"
+                }
+            }
+        })
+    }
+</script>
+{% endblock %}
     <!-- Footer -->
     <section id="footer">
         <div class="container">
@@ -274,57 +392,6 @@ section .section-title {
 }
       </style>
 
-    {% block scripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    {% bootstrap_javascript %}
-    <script>
-    window.addEventListener( "pageshow", function ( event ) {
-        var historyTraversal = event.persisted ||
-        ( typeof window.performance != "undefined" &&
-        window.performance.navigation.type === 2 );
-        if ( historyTraversal ) {
-            // Handle page restore.
-            window.location.reload();
-        }
-    });
-    showModal = (url,name,caption) => {
-        $("#label").text(name)
-        $("#myModal").modal("show")
-        $(".mod-img").attr("src",url)
-        $("#img-desc").text(caption)
-        // $("#url-to-copy").val(window.location.origin + url)
-        // $("#img-location").text("Location: " + loc)
-        // $("#img-category").text("Category: " + cat)
-    }
     
-    function follower(id) {
-        let user_id = parseInt(id)
-        followBtn = document.getElementById("follow-btn")
-        console.log(followBtn)
-        $.ajax({
-            "url": "/ajax/follow/profile/",
-            "type": "POST",
-            "data": {
-            "id":user_id,
-            "csrfmiddlewaretoken": '{{csrf_token}}'
-            },
-            "dataType": "json",
-            "success": function(res) {
-                if(res['followed'] == 1) {
-                    followBtn.classList.remove("btn-primary")
-                    followBtn.classList.add("btn-success")
-                    followBtn.textContent = "Following"
-                    $("#count").text("Followers: " + res["count"])
-                } else {
-                    followBtn.classList.remove("btn-success")
-                    followBtn.classList.add("btn-primary")
-                    followBtn.textContent = "Follow" 
-                    $("#count").text("Followers: " + res["count"])
-                }  
-            }
-        })
-    }
-    </script>
-    {% endblock %}
 </body>
 </html>

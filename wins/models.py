@@ -47,7 +47,7 @@ class Image(models.Model):
     image = ImageField(blank=True, manual_crop="")    
     name = models.CharField(max_length = 31, blank = True)
     caption = models.CharField(max_length = 50, blank = True)
-    likes = models.ManyToManyField(User, related_name = "likes", blank = True)
+    # likes = models.ManyToManyField(User, related_name = "likes", blank = True)
     user = models.ForeignKey(User,null = True , blank = True , on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add = True, blank = True)
 
