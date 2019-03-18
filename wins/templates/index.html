@@ -167,6 +167,31 @@ section .section-title {
       </div>
       <div class="gallery">
         <h2 style="margin:auto;padding-bottom:5px; text-transform: uppercase; margin-top:70px; font-family: 'Abril Fatface', cursive;margin-bottom: 50px;font-weight:thin; border-bottom: 1px solid rgba(0, 0, 0, .4);width: 400px;">Projects <span style="border-bottom:5px solid #007b5e !important;top: -10px;">by</span> others</h2>
+        {% for image in images%}
+    <img src="{{image.user.profile.pic}}" alt="">
+    <div class="row col-md-12">
+        <div class="col-sm-10 col-md-6" style="padding:10px;">
+            <div class="w3-card-4" id="{{image.id}}">
+                <header class="w3-container">
+                    
+                    </a>
+                </header>
+                <div class="w3-container">
+                    <img src="{{image.image.cdn_url}}" alt="here" class="img-responsive" style="max-height: 500px; width: 100%;">
+                </div>
+                <footer class="w3-container" style="padding:30px">
+                    <p>{{image.caption}}</p>
+                        {%csrf_token%}
+                        <p class="likes-icon mr-2">{{image.likes.all.count}} likes</p>
+                        <button class="btn btn-info" type="submit" onclick="liker('{{image.id}}')" style="margin-bottom:30px;">like</button>
+                        <!-- <a href="">&#128077;</a> -->
+                    </form>
+                    
+                </footer>
+            </div>
+        </div>
+    </div>
+    {% endfor%}
       </div>
     </div>
     <!-- Footer -->
