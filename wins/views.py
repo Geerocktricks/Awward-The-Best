@@ -37,6 +37,8 @@ def profile(request):
     '''
     Function to return the profile page
     '''
+    user = request.user
+    all_images = []
     if request.method == "POST":
         form = ImageForm(request.POST)
         if form.is_valid():

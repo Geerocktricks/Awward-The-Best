@@ -73,8 +73,8 @@ TEMPLATES = [
 ]
 
 UPLOADCARE = {
-    'pub_key': 'eaf645284ae37e83a22f',
-    'secret': '661470ab0346949c6d55',
+    'pub_key': '646c11c7cc8655971397',
+    'secret': '9159265f9cea41b69bb9',
 }
 
 WSGI_APPLICATION = 'bestAwwards.wsgi.application'
