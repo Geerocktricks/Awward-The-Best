@@ -25,6 +25,8 @@
         <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -125,11 +127,11 @@
             <hr>
         </div>
     {% for image in images%}
-    <div class="col-md-4 card">
-        <h4>{{ image.title }}</h4>
+    <div class="col-md-3 card" style="margin:10px;">
+        <h4 style="text-align:center;font-family: 'Playfair Display', serif; margin-top:20px;">{{ image.title }}</h4>
         <img class="img-fluid" src="{{image.image.cdn_url }}-/crop/600x600/center/-/quality/lightest/" alt="">
-        <p>{{ image.description }}</p>
-        <p><i>{{ image.posted_by }}</i></p>
+        <p style="font-family: 'Open Sans Condensed', sans-serif;">{{ image.description }}</p>
+        <p style="font-family: 'Open Sans Condensed', sans-serif;font-weight: bold; color: rgb(192, 185, 185);"><i>- {{ image.posted_by }} -</i></p>
         <a href="{{ image.link }}">{{ image.link }}</a>
     </div>
         
