@@ -4,6 +4,7 @@ A web application that will allow users to showcase their projects and get them 
 
 ## Setup/Installation Requirements
 Github link https://github.com/Geerocktricks/Awward-The-Best.git
+live link https://awwardzwins.herokuapp.com/
 ### Installing Dependencies
 pip3 install -r requirements.txt
 
