@@ -16,7 +16,21 @@ def welcome(request):
     '''
     Function to display the index page
     '''
-    return render(request ,'index.html')
+    user = request.user
+    all_images = []
+    if request.method == "POST":
+        form = ImageForm(request.POST)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.save()
+    else:
+        form = ImageForm()
+
+    try:
+        images = Image.objects.all()
+    except Image.DoesNotExist:
+        images = None
+    return render(request ,'index.html' , { 'images': images , 'form': form})
 
 def signup(request):
     '''

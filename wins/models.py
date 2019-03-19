@@ -45,11 +45,14 @@ class Profile(models.Model):
 
 class Image(models.Model):
     image = ImageField(blank=True, manual_crop="")    
-    name = models.CharField(max_length = 31, blank = True)
-    caption = models.CharField(max_length = 50, blank = True)
+    title = models.CharField(max_length = 31, blank = True)
+    posted_by = models.CharField(max_length = 50, blank = True)
     # likes = models.ManyToManyField(User, related_name = "likes", blank = True)
     user = models.ForeignKey(User,null = True , blank = True , on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add = True, blank = True)
+    description = models.TextField(blank=True)
+    technologies = models.CharField(max_length=200, blank=True)
+    link = models.CharField(max_length=200,)
 
     def save_image(self):
         self.save()
@@ -57,6 +60,6 @@ class Image(models.Model):
     def delete_image(self):
         cls.objects.get(id = self.id).delete()
 
-    def update_caption(self,new_caption):
-        self.caption = new_caption
+    def update_posted_by(self,new_posted_by):
+        self.posted_by = new_caption
         self.save()
