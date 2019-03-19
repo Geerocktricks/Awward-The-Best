@@ -30,6 +30,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     {% endblock%}
+    {{ form.media }}
 </head>
 <body style="overflow-x: hidden; background:#F5F5F5">
     <nav class="navbar navbar-expand-md navbar-fixed-top" style="background: #007b5e !important;">
@@ -124,29 +125,9 @@
             <hr>
         </div>
     {% for image in images%}
-    <img src="{{image.user.profile.pic}}" alt="">
-    <div class="row col-md-12">
-        <div class="col-sm-10 col-md-6" style="padding:10px;">
-            <div class="w3-card-4" id="{{image.id}}">
-                <header class="w3-container">
-                    
-                    </a>
-                </header>
-                <div class="w3-container">
-                    <img src="{{image.image.cdn_url}}" alt="here" class="img-responsive" style="max-height: 500px; width: 100%;">
-                </div>
-                <footer class="w3-container" style="padding:30px">
-                    <p>{{image.caption}}</p>
-                        {%csrf_token%}
-                        <p class="likes-icon mr-2">{{image.likes.all.count}} likes</p>
-                        <button class="btn btn-info" type="submit" onclick="liker('{{image.id}}')" style="margin-bottom:30px;">like</button>
-                        <!-- <a href="">&#128077;</a> -->
-                    </form>
-                    
-                </footer>
-            </div>
-        </div>
-    </div>
+    <div class="col-md-4">
+        <img class="img-fluid" src="{{image.image.cdn_url }}-/crop/600x600/center/-/quality/lightest/" alt=""></div>
+    
     {% endfor%}
 </div>
 {% block scripts %}
