@@ -1,0 +1,1 @@
+web: gunicorn bestAwwards.wsgi --log-file -
