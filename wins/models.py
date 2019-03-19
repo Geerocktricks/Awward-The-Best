@@ -26,22 +26,28 @@ class Profile(models.Model):
     Method to create profile table
     '''
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    pic = ImageField(blank=True, manual_crop="")
-    bio = models.CharField(default="Hi!", max_length = 30)
+    avatar = models.ImageField(upload_to='photos/',null=True)
+    fullname = models.CharField(max_length=255,null=True)
+    username = models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile')
+    bio = HTMLField(null=True)
+    email = models.EmailField(null=True)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
+       if created:
+           Profile.objects.create(username=instance)
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
-    
+       instance.profile.save()
+
+    def __str__(self):
+        return self.username.username
+
     @classmethod
-    def search_user(cls,name):
-        return User.objects.filter(username__icontains = name)
+    def search_profile(cls,search_term):
+        profiles = cls.objects.filter(Q(username__username=search_term) | Q(fullname__icontains=search_term))
+        return profiles
 
 class Image(models.Model):
     image = ImageField(blank=True, manual_crop="")    
