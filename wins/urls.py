@@ -7,4 +7,5 @@ urlpatterns=[
     url('signup/' , views.signup , name = 'signup'),
     url('accounts/' , include('django.contrib.auth.urls')),
     url(r'profile/' , views.profile , name='profile'),
+    url(r"^profile/update/$", views.update_profile, name = "update_profile"),
     ]
