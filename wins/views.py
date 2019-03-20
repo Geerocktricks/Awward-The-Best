@@ -66,3 +66,20 @@ def profile(request):
     except Image.DoesNotExist:
         images = None
     return render(request , 'profile.html' , { 'images': images, 'form': form })
+
+def update_profile(request):
+    user = request.user
+    if request.method == "POST":
+        form = ProfileForm(request.POST,request.FILES)
+        if form.is_valid():
+            new_bio = form.cleaned_data["bio"]
+            new_pic = form.cleaned_data["pic"]
+            profile = Profile.objects.get(user = request.user)
+            profile.bio = new_bio
+            profile.pic = new_pic
+            profile.save()
+            final_url = "/profile/" + str(request.user.id) + "/"
+            return redirect(final_url)
+    else:
+        form = ProfileForm()
+    return render(request, "update_profile.html", {"form":form}) 

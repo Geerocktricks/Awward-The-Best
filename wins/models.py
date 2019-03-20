@@ -6,6 +6,7 @@ from django.db import models
 from pyuploadcare.dj.models import ImageField
 from django import forms
 
+
 # Create your models here.
 
 
@@ -26,28 +27,22 @@ class Profile(models.Model):
     Method to create profile table
     '''
 
-    avatar = models.ImageField(upload_to='photos/',null=True)
-    fullname = models.CharField(max_length=255,null=True)
-    username = models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile')
-    bio = HTMLField(null=True)
-    email = models.EmailField(null=True)
-
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    pic = ImageField(blank=True, manual_crop="")
+    bio = models.CharField(default="Hi!", max_length = 30)
+    
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
-       if created:
-           Profile.objects.create(username=instance)
+        if created:
+            Profile.objects.create(user=instance)
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
-       instance.profile.save()
-
-    def __str__(self):
-        return self.username.username
-
+        instance.profile.save()
+    
     @classmethod
-    def search_profile(cls,search_term):
-        profiles = cls.objects.filter(Q(username__username=search_term) | Q(fullname__icontains=search_term))
-        return profiles
+    def search_user(cls,name):
+        return User.objects.filter(username__icontains = name)
 
 class Image(models.Model):
     image = ImageField(blank=True, manual_crop="")    
