@@ -8,4 +8,6 @@ urlpatterns=[
     url('accounts/' , include('django.contrib.auth.urls')),
     url(r'profile/' , views.profile , name='profile'),
     url(r"^profile/update/$", views.update_profile, name = "update_profile"),
+    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
+
     ]
