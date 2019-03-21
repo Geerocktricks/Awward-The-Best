@@ -20,6 +20,7 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
@@ -30,7 +31,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+        
     {% endblock%}
     {{ form.media }}
 </head>
@@ -124,6 +125,7 @@
         <img class="img-fluid" src="{{image.image.cdn_url }}-/crop/600x600/center/-/quality/lightest/" alt="">
         <p style="font-family: 'Open Sans Condensed', sans-serif;">{{ image.description }}</p>
         <p style="font-family: 'Open Sans Condensed', sans-serif;font-weight: bold; color: rgb(192, 185, 185);"><i>- {{ image.posted_by }} -</i></p>
+        
         <a href="{{ image.link }}">{{ image.link }}</a>
     </div>
         
@@ -131,6 +133,11 @@
 </div>
 {% block scripts %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
 {% bootstrap_javascript %}
 <script>
     window.addEventListener("pageshow", function (event) {
@@ -142,88 +149,15 @@
             window.location.reload();
         }
     });
-    $(".like-btn").click((e) => {
-        e.preventDefault()
-    })
-    function liker(id) {
-        image_id = id
-        let icons = document.getElementsByClassName("likes-icon")
-        let btns = document.getElementsByClassName("fa-heart")
-        console.log(icons)
-        console.log(btns)
-        console.log(image_id)
-        $.ajax({
-            "url": "/ajax/like/",
-            "type": "POST",
-            "data": {
-                "id": image_id,
-                "csrfmiddlewaretoken": '{{csrf_token}}'
-            },
-            "dataType": "json",
-            "success": function (res) {
-                let imagess = parseInt(image_id)
-                imagess -= 1
-                icons[imagess].innerHTML = res['likes'] + " likes"
-                if (res["to_red"] == 1) {
-                    alert("Liked")
-                    btns[imagess].classList.remove("far")
-                    btns[imagess].classList.add("fas")
-                    btns[imagess].style.color = "red"
-                } else {
-                    alert("Unliked")
-                    btns[imagess].classList.remove("fas")
-                    btns[imagess].classList.add("far")
-                    btns[imagess].style.color = "black"
-                }
-            }
-        })
-    }
-    $(".comment-btn").click(e => {
-        e.preventDefault()
-    })
-    function commenter(id) {
-        let comments = document.getElementsByClassName("comments")
-        let image_id = parseInt(id)
-        let commentVals = document.getElementsByClassName("comment-val")
-        let comment = commentVals[id - 1].value
-        $.ajax({
-            "url": "/ajax/comment/",
-            "type": "POST",
-            "data": {
-                "id": image_id,
-                "comment": comment,
-                "csrfmiddlewaretoken": '{{csrf_token}}'
-            },
-            "dataType": "json",
-            "success": function (res) {
-                let p = document.createElement("p")
-                p.setAttribute("class", "actual-comment")
-                p.textContent = res['user'] + ": " + res["comment"]
-                comments[image_id - 1].appendChild(p)
-            }
-        })
-        $(".comment-val").val("")
-    }
-    function follower(id) {
-        let image_id = parseInt(id)
-        followBtns = document.getElementsByClassName("follow-btn")
-        $.ajax({
-            "url": "/ajax/follow/",
-            "type": "POST",
-            "data": {
-                "id": image_id,
-                "csrfmiddlewaretoken": '{{csrf_token}}'
-            },
-            "dataType": "json",
-            "success": function (res) {
-                if (res['followed'] == 1) {
-                    followBtns[image_id - 1].innerHTML = "<i class='fas fa-user-check'></i>"
-                } else {
-                    followBtns[image_id - 1].innerHTML = "<i class='fas fa-user-plus'></i>"
-                }
-            }
-        })
-    }
+   $('.ratings').rating(function(vote , event){
+       $.ajax({
+           method:'POST',
+           url:'instrating.php',
+           data:{vote:vote}
+       }).done(function(info){
+           $('.info').html("<b>"+info+"/10</b>")
+       })
+   })
 </script>
 {% endblock %}
     <!-- Footer -->
@@ -284,6 +218,9 @@
       </section>
       <!-- ./Footer -->
     <style>
+        ul i{
+            display: inline;
+        }
         ul a{
             color: #ffff;
         }

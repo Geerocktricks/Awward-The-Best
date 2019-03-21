@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pyuploadcare.dj',
+    'star_ratings',
 ]
 
 MIDDLEWARE = [
